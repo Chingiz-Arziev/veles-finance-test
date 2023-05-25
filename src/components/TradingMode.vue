@@ -9,18 +9,14 @@
 
 		<ul class="trading-mode__tabs">
 			<li
-				v-for="tab in tabs"
-				:key="tab.id"
-				@click="currentTab = tab.id"
-				:class="currentTab === tab.id ? 'active' : ''"
+				v-for="mode in tradingModeOptions"
+				:key="mode.id"
+				@click="currentTradingMode = mode.id"
+				:class="currentTradingMode === mode.id ? 'active' : ''"
 			>
-				{{ tab.mode }}
+				{{ mode.mode }}
 			</li>
 		</ul>
-
-		<div>
-			<p>{{ currentTabContent }}</p>
-		</div>
 
 	</div>
 </template>
@@ -31,32 +27,26 @@ import { ref, watch } from 'vue';
 export default {
 	emits: ['getTradingMode'],
   setup(_, {emit}) {
-    const currentTab = ref(1);
+    const currentTradingMode = ref(1);
 
-    const tabs = [
+    const tradingModeOptions = [
       { id: 1, mode: 'простой' },
       { id: 2, mode: 'свой' }
     ];
 
-    const currentTabContent = ref(tabs[0].content);
+    const currentTabMode = ref(tradingModeOptions[0].mode);
 
-		watch(currentTab, () => {
-			const selectedTab = tabs.find(tab => tab.id === currentTab.value);
-			currentTabContent.value = selectedTab.content;
-		})
+		watch(currentTradingMode, () => {
+			const selectedTradingMode = tradingModeOptions.find(mode => mode.id === currentTradingMode.value);
+			currentTabMode.value = selectedTradingMode.mode;
 
-		watch(currentTab, (newValue) => {
-			if(newValue === 1) {
-				emit('getTradingMode', "простой")
-			}	else {
-				emit('getTradingMode', "свой")
-			}
+			emit('getTradingMode', selectedTradingMode.mode)
 		})
 
     return {
-      currentTab,
-      tabs,
-      currentTabContent
+			currentTradingMode,
+			tradingModeOptions,
+			currentTabMode
     };
   },
 };

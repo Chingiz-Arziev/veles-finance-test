@@ -2,6 +2,8 @@
   <div class="container">
 		<Exchanges @getExchange="handleExchange"/>
 		<ApiKey @getApiKey="handleApiKey"/>
+		<Algorithm @getAlgorithmMode="handleAlgorithm"/>
+
 		<TradingMode @getTradingMode="handleTradingMode"/>
 
 		<button class="btn" @click="logData">Создать Бота</button>
@@ -9,16 +11,15 @@
 </template>
 
 <script>
-import Exchanges from "@/components/Exchanges.vue";
-import ApiKey from '@/components/ApiKey.vue'
-import TradingMode from "@/components/TradingMode.vue";
-
-import Test from '@/components/Test.vue'
-
 import { ref } from 'vue';
 
+import Exchanges from "@/components/Exchanges.vue";
+import ApiKey from '@/components/ApiKey.vue'
+import Algorithm from "@/components/Algorithm.vue";
+import TradingMode from "@/components/TradingMode.vue";
+
 export default {
-	components: {Exchanges, ApiKey, TradingMode, Test},
+	components: {Exchanges, ApiKey, TradingMode, Algorithm},
 
 	setup() {
 		const settings = ref([])
@@ -28,6 +29,10 @@ export default {
 		};
 
 		const handleApiKey = (data) => {
+			settings.value.push(data)
+		};
+
+		const handleAlgorithm = (data) => {
 			settings.value.push(data)
 		};
 
@@ -44,6 +49,7 @@ export default {
 			handleExchange,
 			handleApiKey,
 			handleTradingMode,
+			handleAlgorithm,
 			logData
 		};
 	}
