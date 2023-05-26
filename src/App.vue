@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-		<Exchanges @getExchange="handleExchange"/>
-		<ApiKey @getApiKey="handleApiKey"/>
-		<Algorithm @getAlgorithmMode="handleAlgorithm"/>
-
-		<TradingMode @getTradingMode="handleTradingMode"/>
-
-		<button class="btn" @click="logData">Создать Бота</button>
+		<Exchanges @getExchange="setSetting('exchange',$event)"/>
+		<ApiKey @getApiKey="setSetting('apiKey',$event)"/>
+		<Algorithm @getAlgorithmMode="setSetting('algorithm',$event)"/>
+		<TradingPair @getTradingPair="setSetting('tradingPair',$event)"/>
+		<Deposit @getDeposit="setSetting('deposit', $event)"/>
+		<TradingMode @getTradingMode="setSetting('tradingMode',$event)"/>
+		<CreateBot :dataSettings="botSettings"/>
 	</div>
 </template>
 
@@ -16,72 +16,37 @@ import { ref } from 'vue';
 import Exchanges from "@/components/Exchanges.vue";
 import ApiKey from '@/components/ApiKey.vue'
 import Algorithm from "@/components/Algorithm.vue";
+import TradingPair from "@/components/TradingPair.vue";
+import Deposit from "@/components/Deposit.vue";
 import TradingMode from "@/components/TradingMode.vue";
+import CreateBot from "@/components/CreateBot.vue";
 
 export default {
-	components: {Exchanges, ApiKey, TradingMode, Algorithm},
+	components: {Exchanges, ApiKey, Algorithm, TradingPair, Deposit, TradingMode, CreateBot},
 
 	setup() {
-		const settings = ref([])
+		const botSettings = ref({
+			'exchange': '',
+			'apiKey': '',
+			'algorithm': '',
+			'tradingPair': {
+				"first": '',
+				"second": ''
+			},
+			'deposit': '',
+			'tradingMode': ''
+		})
 
-		const handleExchange = (data) => {
-			settings.value.push(data)
-		};
-
-		const handleApiKey = (data) => {
-			settings.value.push(data)
-		};
-
-		const handleAlgorithm = (data) => {
-			settings.value.push(data)
-		};
-
-		const handleTradingMode = (data) => {
-			settings.value.push(data)
-		};
-
-		const logData = () => {
-			console.log('ваши настройки:', settings.value);
-		};
+		const setSetting = (key, value) => {
+			botSettings.value[key] = value
+		}
 
 		return {
-			settings,
-			handleExchange,
-			handleApiKey,
-			handleTradingMode,
-			handleAlgorithm,
-			logData
+			botSettings,
+			setSetting,
 		};
 	}
 };
 
 </script>
 
-<style scoped>
-.container {
-	display: flex;
-	flex-direction: column;
-	max-width: 650px;
-}
-
-.btn {
-	padding: 1rem 0;
-	margin: 2rem 0;
-	background-color: #d3822d;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 1rem;
-}
-
-.btn:hover {
-	background-color: #d3822d;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	font-size: 1rem;
-	scale: 1.005;
-	transition: 0.3s;
-}
-</style>

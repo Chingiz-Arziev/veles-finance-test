@@ -1,0 +1,439 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat SemiBold", serif;
+  background-color: #1f2128;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+
+    .btn {
+      padding: 1rem 0;
+      margin: 2rem 0;
+      background-color: #d3822d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: #d3822d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        scale: 1.005;
+        transition: 0.3s;
+      }
+    }
+  }
+
+  .algorithm {
+    margin: 2rem 0 0 0 ;
+    color: #fff;
+
+    .algorithm-info {
+      display: flex;
+      flex-direction: row;
+      margin: 1.5rem 0;
+    }
+
+    .algorithm-info__title {
+      font-size: 1rem;
+    }
+
+    .algorithm-select__label {
+      font-size: 0.7rem;
+      color: #8b8fa3;
+    }
+
+    .algorithm-info__clue {
+      display: flex;
+      align-items: center;
+    }
+
+    .algorithm-info__clue img {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-left: 0.7rem;
+      filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
+    }
+
+    .algorithm-tabs {
+      display: flex;
+      flex-direction: row;
+      margin-top: 1rem;
+    }
+
+    .algorithm-tabs input[type=radio] {
+      display: none;
+    }
+
+    .algorithm-tabs__tab {
+      width: 6rem;
+      height: 2.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid #1f2128;
+      background: #1f2128;
+      box-shadow: 0.1rem 0.1rem 0.2rem rgb(128 129 145 / 20%);
+      cursor: pointer;
+      margin: 0 2rem 0 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .algorithm-tabs__tab {
+      font-size: 0.7rem;
+    }
+
+    .long {
+      font-size: 0.7rem;
+      text-align: center;
+      background-color: green;
+      padding: 0.2rem;
+      border-radius: 0.2rem;
+    }
+
+    .short {
+      font-size: 0.7rem;
+      text-align: center;
+      background-color: red;
+      padding: 0.2rem;
+      border-radius: 0.2rem;
+    }
+
+    hr {
+      margin: 2rem 0;
+      opacity: 0.15;
+    }
+
+  }
+
+  .apikey {
+    margin: 2rem 0 0 0 ;
+    color: #fff;
+
+    .apikey-info {
+      display: flex;
+      flex-direction: row;
+      margin: 1.5rem 0;
+    }
+
+    .apikey-info__title {
+      font-size: 1rem;
+    }
+
+    .apikey-select__label {
+      font-size: 0.7rem;
+      color: #8b8fa3;
+    }
+
+    .apikey-info__clue {
+      display: flex;
+      align-items: center;
+    }
+
+    .apikey-info__clue img {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-left: 0.7rem;
+      filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
+    }
+
+    .apikey-select {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .apikey-select select {
+      height: 40px;
+      padding: 5px 10px;
+      margin: 1rem 0 0 0;
+      background-color: #292c35;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .apikey-select option {
+      font-size: 1rem;
+      margin: 1rem;
+    }
+
+    hr {
+      margin: 2rem 0;
+      opacity: 0.15;
+    }
+  }
+
+  .exchanges {
+    width: 640px;
+    margin: 2rem 0 0 0 ;
+    color: #fff;
+
+    .exchanges-info {
+      display: flex;
+      flex-direction: row;
+      margin: 1.5rem 0;
+    }
+
+    .exchanges-info__title {
+      font-size: 1rem;
+    }
+
+    .exchanges-select__label {
+      font-size: 0.7rem;
+      color: #8b8fa3;
+    }
+
+    .exchanges-info__clue {
+      display: flex;
+      align-items: center;
+    }
+
+    .exchanges-info__clue img {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-left: 0.7rem;
+      filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
+    }
+
+    .exchanges-select {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exchanges-select select {
+      height: 40px;
+      padding: 5px 10px;
+      margin: 1rem 0 0 0;
+      background-color: #292c35;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .exchanges-select select:focus {
+      border: none;
+    }
+
+    .exchanges-select option {
+      font-size: 1rem;
+      margin: 1rem;
+    }
+
+    hr {
+      margin: 2rem 0;
+      opacity: 0.15;
+    }
+  }
+
+  .trading-mode {
+    color: #fff;
+    margin: 0 0 2rem 0;
+
+    .trading-mode-info {
+      display: flex;
+      flex-direction: row;
+
+    }
+
+    .trading-mode-info__title {
+      display: flex;
+      flex-direction: row;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+    }
+
+    .trading-mode-info__clue {
+      display: flex;
+      align-items: center;
+    }
+
+    .trading-mode-info__clue img {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-left: 0.7rem;
+      filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
+    }
+
+    .trading-mode__tabs {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .trading-mode__tabs li {
+      margin: 1rem 1rem 1rem 0 ;
+      list-style-type: none;
+      cursor: pointer;
+      padding-bottom: 0.4rem;
+    }
+
+    .active {
+      cursor: pointer;
+      border-bottom: 3px solid #d3822d;
+    }
+
+    hr {
+      margin: 2rem 0;
+    }
+  }
+
+  .trading-pair {
+    margin: 2rem 0 0 0 ;
+    color: #fff;
+
+    .trading-pair-info {
+      display: flex;
+      flex-direction: row;
+      margin: 1.5rem 0;
+    }
+
+    .trading-pair-info__title {
+      font-size: 1rem;
+    }
+
+    .description__title {
+      font-size: 0.9rem;
+    }
+
+    .description__title__sub {
+      font-size: 0.7rem;
+    }
+
+    .trading-pair-info__clue img {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-left: 0.7rem;
+      filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
+    }
+
+    .recommended-pairs {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      max-width: 7rem;
+      margin: 0.6rem 0.6rem 0 0;
+      padding: 0.7rem 1.1rem 0.7rem 0.7rem;
+      border: 1px solid #25272f;
+      background: #25272f;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .recommended-pairs input {
+      display: none;
+    }
+
+    .recommended-pairs__pair {
+      font-size: 0.6rem;
+      color: #9d9eaf;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .trading-pair-own {
+      margin: 2rem 0;
+
+      .select-pair {
+        margin: 0 1.2rem 0 0;
+        width: 7rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.3rem;
+        color: #fff;
+        font-size: 0.7rem;
+      }
+    }
+
+    hr {
+      margin: 2rem 0;
+      opacity: 0.15;
+    }
+  }
+
+  .deposit {
+    margin: 2rem 0 0 0 ;
+    color: #fff;
+
+    .deposit-info {
+      display: flex;
+      flex-direction: row;
+      margin: 1.5rem 0;
+    }
+
+    .deposit-info__title {
+      font-size: 1rem;
+    }
+
+    .deposit-info__clue {
+      display: flex;
+      align-items: center;
+    }
+
+    .deposit-info__clue img {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-left: 0.7rem;
+      filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
+    }
+
+    .deposit-select {
+      display: flex;
+    }
+
+    .deposit-select input{
+      height: 3rem;
+      padding: 0.5rem 0.5rem 0.5rem 3rem;
+      margin: 1rem 0 0 0;
+      background-color: #292c35;
+      color: #fff;
+      border: 1px solid #7a7a7a;
+      border-radius: 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .deposit-select__custom {
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 1rem;
+        bottom: 0;
+        right: 12rem;
+        margin: auto 0;
+        width: 25px;
+        height: 25px;
+        background: url('https://cdn0.iconfinder.com/data/icons/ThemeShock-credit-cards-icons/64/mastercard.png') no-repeat;
+        background-size: cover;
+      }
+    }
+
+    hr {
+      margin: 2rem 0;
+      opacity: 0.15;
+    }
+  }
+}
+

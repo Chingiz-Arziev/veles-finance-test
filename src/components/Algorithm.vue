@@ -10,17 +10,43 @@
 		<div class="algorithm-select">
 			<label class="algorithm-select__label" for="">Алгоритм</label>
 			<div class="algorithm-tabs">
-				<label
-					v-for="algorithm in algorithmOptions"
-					:key="algorithm.id"
-					@click="currentAlgorithm = algorithm.id"
-					:class="currentAlgorithm === algorithm.id ? 'long' : 'short'"
-				>
-					<input type="radio" name="algorithm">
-					<div class="algorithm-tabs__tab">
-						<span class="algorithm-tabs__label">{{algorithm.mode}}</span>
+
+				<label>
+					<input
+						v-model="selectedAlgorithm"
+						type="radio"
+						name="algorithm"
+						value="long"
+						@click="changeColor('long')"
+					>
+					<div
+						class="algorithm-tabs__tab"
+						:style="longAlgorithm ? {border: '1px solid #6b6c79'} : ''"
+					>
+						<span
+							:class="longAlgorithm ? 'long' : ''"
+						>Long</span>
 					</div>
 				</label>
+
+				<label>
+					<input
+						v-model="selectedAlgorithm"
+						type="radio"
+						name="algorithm"
+						value="short"
+						@click="changeColor('short')"
+					>
+					<div
+						class="algorithm-tabs__tab"
+						:style="shortAlgorithm ? {border: '1px solid #6b6c79'} : ''"
+					>
+						<span
+							:class="shortAlgorithm ? 'short' : ''"
+						>Short</span>
+					</div>
+				</label>
+
 			</div>
 		</div>
 
@@ -35,104 +61,30 @@ export default {
 	emits: ['getAlgorithmMode'],
 	setup(_, {emit}) {
 
-		const currentAlgorithm = ref(1);
+		const selectedAlgorithm = ref('')
+		const longAlgorithm = ref('');
+		const shortAlgorithm = ref('');
 
-		const algorithmOptions = [
-			{id: 1, mode: 'Long'},
-			{id: 2, mode: 'Short'},
-		]
+		const changeColor = (selectedInput) => {
+			if (selectedInput === 'long') {
+				longAlgorithm.value = 'green';
+				shortAlgorithm.value = '';
+			} else if (selectedInput === 'short') {
+				longAlgorithm.value = '';
+				shortAlgorithm.value = 'red';
+			}
+		};
 
-		const currentTabMode = ref(algorithmOptions[0].mode);
-
-		watch(currentAlgorithm, () => {
-			const selectedAlgorithm = algorithmOptions.find(mode => mode.id === currentAlgorithm.value)
-			currentTabMode.value = selectedAlgorithm.mode
-
-			emit('getAlgorithmMode', selectedAlgorithm.mode)
+		watch(selectedAlgorithm, () => {
+			emit('getAlgorithmMode', selectedAlgorithm.value)
 		})
 
 		return {
-			currentAlgorithm,
-			algorithmOptions,
-			currentTabMode
-		}
+			longAlgorithm,
+			shortAlgorithm,
+			changeColor,
+			selectedAlgorithm
+		};
 	}
 }
 </script>
-
-<style scoped>
-.algorithm {
-	margin: 2rem 0 0 0 ;
-	color: #fff;
-}
-
-.algorithm-info {
-	display: flex;
-	flex-direction: row;
-	margin: 1.5rem 0;
-}
-
-.algorithm-info__title {
-	font-size: 1rem;
-}
-
-.algorithm-select__label {
-	font-size: 0.7rem;
-	color: #8b8fa3;
-}
-
-.algorithm-info__clue {
-	display: flex;
-	align-items: center;
-}
-
-.algorithm-info__clue img {
-	width: 0.9rem;
-	height: 0.9rem;
-	margin-left: 0.7rem;
-	filter: invert(63%) sepia(9%) saturate(481%) hue-rotate(199deg) brightness(95%) contrast(82%);
-}
-
-.algorithm-tabs {
-	display: flex;
-	flex-direction: row;
-	margin-top: 1rem;
-}
-
-.algorithm-tabs input[type=radio] {
-	display: none;
-}
-
-.algorithm-tabs__tab {
-	width: 6rem;
-	height: 2.6rem;
-	border-radius: 0.6rem;
-	border: 1px solid #1f2128;
-	background: #1f2128;
-	box-shadow: 0.1rem 0.1rem 0.2rem rgb(128 129 145 / 20%);
-	cursor: pointer;
-	margin: 0 2rem 0 0;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.algorithm-tabs__label {
-	font-size: 0.7rem;
-	text-align: center;
-}
-
-.long {
-	color: green;
-}
-
-.short {
-	color: red;
-}
-
-hr {
-	margin: 2rem 0;
-	opacity: 0.15;
-}
-</style>
